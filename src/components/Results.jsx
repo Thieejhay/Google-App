@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {useResultContext} from '../context/ResultContextProvider';
 import { useLocation } from 'react-router-dom';
 import { Loading } from './Loading';
@@ -22,20 +22,20 @@ export const Results = () => {
     switch(location.pathname){
       case '/search':
         return(
-          <div className='flex flex-wrap justify-between space-y-6 sm:px-56'>
+          <div className='flex flex-col justify-between space-y-10 sm:px-40 border-t-2 border-grey-300'>
             {
-            
+              
               data?.map(({link, title, description},index)=>(
-                  <div key={index} className='md:w-2/5 w-full'>
+                  <div key={index} className='md:w-[700px] w-full mt-5'>
                       <a href={link} target='_blank' rel='noreferrer'>
-                      <p className='text-sm hover:underline dark:text-blue-300 text-blue-700'>
+                      <p className='text-base dark:text-blue-300'>
                           {link.length > 30 ? link.substring(0,30) : link}
                         </p>
-                        <p className='text-sm'>
-                          {description.length > 250 ? description.substring(0,250)+'...' : description}
-                        </p>
-                       
+                        <h3 className='text-[#1A0DAB] hover:underline contrast-150 font-semibold text-[20px]'>{title}</h3>
                       </a>
+                      <p className='text-base'>
+                          {description.length > 250 ? description.substring(0,250)+'...' : description}
+                      </p>
                   </div>
               ))
             }
@@ -58,17 +58,17 @@ export const Results = () => {
       );
     case '/news':
       return(
-        <div className='flex flex-wrap justify-center items-center'>
+        <div className='flex flex-col justify-between space-y-10 sm:px-40 border-t-2 border-grey-300'>
           {
             data?.map(({links,id,source,title})=>(
-              <div key={id} className='md:w-2/5 w-full'>
+              <div key={id} className='md:w-[600px] w-full mt-5'>
                   <a href={links?.[0].href} target='_blank' rel='noreferrer' className='hover:underline'>
                     <p className='text-lg dark:text-blue-300 text-blue-700'>
                       {title}
                     </p>
                     <div className='flex gap-4'>
-                      <a href={source?.href} target='_blank' rel='noreferrer'>
-                          {source?.href}
+                      <a href={source?.title} target='_blank' rel='noreferrer'>
+                          {source?.title}
                       </a>
                     </div>
                   </a>
